@@ -15,9 +15,9 @@ class Contrato(models.Model):
                                                        MinValueValidator(23, message='Entre una edad entre 23 y 100')])
     ci = models.CharField(verbose_name='Carnet de identidad',
                           validators=[
-                              RegexValidator(r'^\d{1,10}$',
+                              RegexValidator(r'^\d{1,11}$',
                                              message='Entre un carnet de identidad válido(11 dígitos)'), ],
-                          max_length=11, min_length=11)
+                          max_length=11, )
     validity = models.PositiveSmallIntegerField(verbose_name='Tiempo de vigencia (meses)', validators=[
         MaxValueValidator(24, message='El tiempo debe ser menor a 25 meses')])
     date_creation = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name='Fecha de creado')
@@ -40,7 +40,20 @@ class Balita(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Cantidad', blank=True, null=True, default=1)
 
 
-class Informe(models.Model):
+class Incidente(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    description = models.TextField(max_length=500, verbose_name='Description del problema')
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        user = get_current_user()
+        self.user = user
+        super(Incidente, self).save()
+
+    def __str__(self):
+        return f'Incidente de: {str(self.user)}'
+
+class InformeReserva(models.Model):
     deliver = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Entregador', on_delete=models.CASCADE,
                                 null=True, blank=True, )
     receiver = models.CharField(max_length=100, verbose_name='Nombre del recibidor')
@@ -48,11 +61,11 @@ class Informe(models.Model):
     quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
     balita = models.ForeignKey(Balita, verbose_name='Producto (Balita de Gas)', on_delete=models.CASCADE, null=True,
                                blank=True)
-    type = models.CharField(verbose_name='Tipo de informe', choices=(
-        ('entrega', 'Entrega'),
-        ('venta', 'Venta'),
-        ('reservacion', 'Reservación'),
-    ))
+    # type = models.CharField(verbose_name='Tipo de informe', choices=(
+    #     ('entrega', 'Entrega'),
+    #     ('venta', 'Venta'),
+    #     ('reservacion', 'Reservación'),
+    # ), max_length=100)
     description = models.TextField(max_length=500, verbose_name='Descripción del informe', null=True, blank=True)
 
     def __str__(self):
@@ -66,7 +79,7 @@ class Informe(models.Model):
             self.balita = Balita.objects.first()
         except:
             pass
-        super(Informe, self).save()
+        super(InformeReserva, self).save()
 
     class Meta:
         ordering = ['date_creation']
