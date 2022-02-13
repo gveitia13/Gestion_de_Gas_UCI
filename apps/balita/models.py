@@ -53,33 +53,84 @@ class Incidente(models.Model):
     def __str__(self):
         return f'Incidente de: {str(self.user)}'
 
-class InformeReserva(models.Model):
-    deliver = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Entregador', on_delete=models.CASCADE,
-                                null=True, blank=True, )
-    receiver = models.CharField(max_length=100, verbose_name='Nombre del recibidor')
+
+class Informe(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Entregador', on_delete=models.CASCADE,
+                             null=True, blank=True, )
     date_creation = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name='Fecha de creado')
-    quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
     balita = models.ForeignKey(Balita, verbose_name='Producto (Balita de Gas)', on_delete=models.CASCADE, null=True,
                                blank=True)
+
     # type = models.CharField(verbose_name='Tipo de informe', choices=(
     #     ('entrega', 'Entrega'),
     #     ('venta', 'Venta'),
     #     ('reservacion', 'Reservación'),
     # ), max_length=100)
-    description = models.TextField(max_length=500, verbose_name='Descripción del informe', null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+class InformeIncidencia(Informe):
+    # Lo hace el cliente asere
+    motive = models.TextField(max_length=250, verbose_name='Motivo del reporte')
 
     def __str__(self):
-        return f'{str(self.deliver)}'
+        return f'{str(self.user)}'
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        deliver = get_current_user()
-        self.deliver = deliver
+        user = get_current_user()
+        self.user = user
+        try:
+            self.balita = Balita.objects.first()
+        except:
+            pass
+        super(InformeIncidencia, self).save()
+
+    class Meta:
+        ordering = ['date_creation']
+
+
+class InformeReserva(Informe):
+    # Lo hace el cliente asere
+    quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
+
+    def __str__(self):
+        return f'{str(self.user)}'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        user = get_current_user()
+        self.user = user
         try:
             self.balita = Balita.objects.first()
         except:
             pass
         super(InformeReserva, self).save()
+
+    class Meta:
+        ordering = ['date_creation']
+
+
+class InformeVenta(Informe):
+    # Lo hace el distribuidor
+    receiver = models.CharField(max_length=100, verbose_name='Nombre del recibidor')
+    quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
+    importe = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Importe total', default=0)
+
+    def __str__(self):
+        return f'{str(self.user)}'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        user = get_current_user()
+        self.user = user
+        try:
+            self.balita = Balita.objects.first()
+        except:
+            pass
+        super(InformeVenta, self).save()
 
     class Meta:
         ordering = ['date_creation']
