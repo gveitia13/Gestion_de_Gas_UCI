@@ -40,22 +40,22 @@ class Balita(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Cantidad', blank=True, null=True, default=1)
 
 
-class Incidente(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField(max_length=500, verbose_name='Description del problema')
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        user = get_current_user()
-        self.user = user
-        super(Incidente, self).save()
-
-    def __str__(self):
-        return f'Incidente de: {str(self.user)}'
+# class Incidente(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+#     description = models.TextField(max_length=500, verbose_name='Description del problema')
+#
+#     def save(self, force_insert=False, force_update=False, using=None,
+#              update_fields=None):
+#         user = get_current_user()
+#         self.user = user
+#         super(Incidente, self).save()
+#
+#     def __str__(self):
+#         return f'Incidente de: {str(self.user)}'
 
 
 class Informe(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Entregador', on_delete=models.CASCADE,
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuario', on_delete=models.CASCADE,
                              null=True, blank=True, )
     date_creation = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name='Fecha de creado')
     balita = models.ForeignKey(Balita, verbose_name='Producto (Balita de Gas)', on_delete=models.CASCADE, null=True,
