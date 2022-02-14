@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from datetime import datetime
 
 from apps.balita.models import *
 
@@ -42,6 +43,25 @@ class InformeReservaForm(ModelForm):
         model = InformeReserva
         fields = '__all__'
         exclude = ['date_creation', 'user', 'balita']
+
+    # date_to_reserve = forms.DateField(
+    #     widget=forms.DateInput(
+    #         format='%d/%m/%Y',
+    #         attrs={
+    #             'type': 'date',
+    #         }
+    #     ),
+    #     input_formats=('%d/%m/%Y',)
+    # )
+        widgets = {
+            'date_to_reserve': forms.DateInput(
+                format='%d/%m/%Y',
+                attrs={
+                    'class': 'circular',
+                    'type': 'date',
+                },
+            )
+        }
 
 
 class InformeVentaForm(ModelForm):

@@ -4,6 +4,7 @@
     <td>Usuario</td>
     <td>Cantidad</td>
     <td>Fecha de creado</td>
+    <td>Fecha de reserva</td>
     <td>Opciones</td>
 {% endblock %}
     {% block head_list %}
@@ -16,6 +17,7 @@
                 <td>{{ obj.user }}</td>
                 <td>{{ obj.quantity }}</td>
                 <td>{{ obj.date_creation }}</td>
+                <td>{{ obj.date_to_reserve }}</td>
                 <td>
                     <a href="{% url 'balita:reserva_update' obj.id %}" class="btn btn-warning btn-sm circular"><i
                             class="mdi mdi-square-edit-outline"></i></a>
