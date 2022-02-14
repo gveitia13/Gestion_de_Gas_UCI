@@ -1,0 +1,37 @@
+{% extends 'base_list.html' %}
+{% block columns %}
+    <td>No</td>
+    <td>User</td>
+    <td>Nombre Cliente</td>
+    <td>Edad</td>
+    <td>No Carnet</td>
+    <td>Tiempo vigencia (meses)</td>
+    <td>Fecha de creado</td>
+    <td>Opciones</td>
+{% endblock %}
+
+{% block rows %}
+    {% if object_list %}
+        {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.pk }}</td>
+                <td>{{ obj.user }}</td>
+                <td>{{ obj.name }}</td>
+                <td>{{ obj.age }}</td>
+                <td>{{ obj.ci }}</td>
+                <td>{{ obj.validity }}</td>
+                <td>{{ obj.date_creation }}</td>
+                <td>
+                    <a href="{% url 'contrato_update' obj.id %}" class="btn btn-warning btn-sm"><i
+                            class="mdi mdi-square-edit-outline"></i></a>
+                    <a href="{% url 'contrato_delete' obj.id %}" class="btn btn-danger btn-sm"><i
+                            class="mdi mdi-trash-can-outline"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td> No hay datos para mostrar</td>
+        </tr>
+    {% endif %}
+{% endblock %}

@@ -18,10 +18,22 @@ from django.contrib import admin
 from django.urls import path, include
 
 from Reserva_de_gas import settings
-from apps.balita import views
+from apps.balita.views.index.views import Startpage
+from apps.balita.views.contrato.views import *
+from apps.balita.views.incidencia.views import *
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('/', include('apps.balita.urls')),
-                  path('', views.Index, name='index'),
+                  path('', Startpage.as_view(), name='index'),
+                  # Contrato
+                  path('contrato/list/', ContratoListView.as_view(), name='contrato_list'),
+                  path('contrato/add/', ContratoCreateView.as_view(), name='contrato_add'),
+                  path('contrato/update/<int:pk>/', ContratoUpdateView.as_view(), name='contrato_update'),
+                  path('contrato/delete/<int:pk>/', ContratoDeleteView.as_view(), name='contrato_delete'),
+                  # Incidencias
+                  path('incidencia/list/', IncidenciaListView.as_view(), name='incidencia_list'),
+                  path('incidencia/add/', IncidenciaCreateView.as_view(), name='incidencia_add'),
+                  path('incidencia/update/<int:pk>/', IncidenciaUpdateView.as_view(), name='incidencia_update'),
+                  path('incidencia/delete/<int:pk>/', IncidenciaDeleteView.as_view(), name='incidencia_delete'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

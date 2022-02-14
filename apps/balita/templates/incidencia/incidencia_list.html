@@ -1,0 +1,29 @@
+{% extends 'base_list.html' %}
+{% block columns %}
+    <td>User</td>
+    <td>Motivo</td>
+    <td>Fecha de creado</td>
+    <td>Opciones</td>
+{% endblock %}
+
+{% block rows %}
+    {% if object_list %}
+        {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.user }}</td>
+                <td>{{ obj.motive }}</td>
+                <td>{{ obj.date_creation }}</td>
+                <td>
+                    <a href="{% url 'incidencia_update' obj.id %}" class="btn btn-warning btn-sm"><i
+                            class="mdi mdi-square-edit-outline"></i></a>
+                    <a href="{% url 'incidencia_delete' obj.id %}" class="btn btn-danger btn-sm"><i
+                            class="mdi mdi-trash-can-outline"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td> No hay datos para mostrar</td>
+        </tr>
+    {% endif %}
+{% endblock %}

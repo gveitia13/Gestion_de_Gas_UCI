@@ -61,12 +61,6 @@ class Informe(models.Model):
     balita = models.ForeignKey(Balita, verbose_name='Producto (Balita de Gas)', on_delete=models.CASCADE, null=True,
                                blank=True)
 
-    # type = models.CharField(verbose_name='Tipo de informe', choices=(
-    #     ('entrega', 'Entrega'),
-    #     ('venta', 'Venta'),
-    #     ('reservacion', 'Reservación'),
-    # ), max_length=100)
-
     class Meta:
         abstract = True
 

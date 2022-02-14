@@ -14,13 +14,13 @@ class User(AbstractUser):
         return self.first_name if self.first_name else self.username
 
     def save(self, *args, **kwargs):
-        # passw = self.password
-        # if self.pk is None:
-        #     self.set_password(passw)
-        # else:
-        #     user = User.objects.get(pk=self.pk)
-        #     if user.password != passw:
-        #         self.set_password(passw)
-        self.set_password(self.password)
+        passw = self.password
+        if self.pk is None:
+            self.set_password(passw)
+        else:
+            user = User.objects.get(pk=self.pk)
+            if user.password != passw:
+                self.set_password(passw)
+        # self.set_password(self.password)
         # transaction.on_commit(lambda: self.groups.add(Group.objects.first()))
         super(User, self).save()
