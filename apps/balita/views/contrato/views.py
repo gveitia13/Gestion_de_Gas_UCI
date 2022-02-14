@@ -9,11 +9,11 @@ class ContratoListView(generic.ListView, ):
     model = Contrato
     template_name = 'contrato/contrato_list.html'
     queryset = Contrato.objects.all()
-    success_url = reverse_lazy('contrato_list')
+    success_url = reverse_lazy('balita:contrato_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('contrato_add')
+        context['create_url'] = reverse_lazy('balita:contrato_add')
         context['entity'] = 'Contrato'
         context['title'] = 'Listado de contratos'
         return context
@@ -23,11 +23,11 @@ class ContratoCreateView(generic.CreateView):
     model = Contrato
     template_name = 'contrato/contrato_create.html'
     form_class = ContratoForm
-    success_url = reverse_lazy('contrato_list')
+    success_url = reverse_lazy('balita:contrato_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('contrato_add')
+        context['create_url'] = reverse_lazy('balita:contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
         context['title'] = 'Crear un contrato'
@@ -38,11 +38,11 @@ class ContratoUpdateView(generic.UpdateView):
     model = Contrato
     template_name = 'contrato/contrato_create.html'
     form_class = ContratoForm
-    success_url = reverse_lazy('contrato_list')
+    success_url = reverse_lazy('balita:contrato_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('contrato_add')
+        context['create_url'] = reverse_lazy('balita:contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
         context['title'] = 'Actualizar contrato'
@@ -52,11 +52,11 @@ class ContratoUpdateView(generic.UpdateView):
 class ContratoDeleteView(generic.DeleteView):
     model = Contrato
     template_name = 'delete.html'
-    success_url = reverse_lazy('contrato_list')
+    success_url = reverse_lazy('balita:contrato_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('contrato_add')
+        context['create_url'] = reverse_lazy('balita:contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
         context['title'] = 'Eliminar contrato'

@@ -1,15 +1,20 @@
 $(function () {
   document
     .querySelectorAll('a')
-    .forEach(e => e.classList.remove('active', 'w3-blue-grey'))
+    .forEach(e => e.classList.remove('active'))
+
+  if (window.location.pathname.includes('incidencia'))
+    changeSidebar('.incidencia-sidebar')
+  if (window.location.pathname.includes('reserva'))
+    changeSidebar('.reserva-sidebar')
+  if (window.location.pathname.includes('venta'))
+    changeSidebar('.venta-sidebar')
+  if (window.location.pathname.includes('contrato'))
+    changeSidebar('.contrato-sidebar')
 })
 let changeSidebar = function (nav_treeview) {
     let father = document.querySelector(nav_treeview)
-      // son = document.querySelector(nav_item)
     father.classList.add('active')
-    // father.parentElement.classList.add('menu-open')
-    // son.classList.add('bg-primary')
-    // son.parentElement.parentElement.style.display = 'block'
   },
   message_error = function (obj) {
     let html = ``

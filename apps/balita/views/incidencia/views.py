@@ -9,11 +9,11 @@ class IncidenciaListView(generic.ListView, ):
     model = InformeIncidencia
     template_name = 'incidencia/incidencia_list.html'
     queryset = InformeIncidencia.objects.all()
-    success_url = reverse_lazy('incidencia_list')
+    success_url = reverse_lazy('balita:incidencia_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('incidencia_add')
+        context['create_url'] = reverse_lazy('balita:incidencia_add')
         context['entity'] = 'Informe de Incidencia'
         context['title'] = 'Listado de Incidencias'
         return context
@@ -23,11 +23,11 @@ class IncidenciaCreateView(generic.CreateView):
     model = InformeIncidencia
     template_name = 'form.html'
     form_class = InformeIncidenciaForm
-    success_url = reverse_lazy('incidencia_list')
+    success_url = reverse_lazy('balita:incidencia_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('incidencia_add')
+        context['create_url'] = reverse_lazy('balita:incidencia_add')
         context['entity'] = 'Informe de Incidencia'
         context['title'] = 'Crear informe de Incidencias'
         context['list_url'] = self.success_url
@@ -38,11 +38,11 @@ class IncidenciaUpdateView(generic.UpdateView):
     model = InformeIncidencia
     template_name = 'form.html'
     form_class = InformeIncidenciaForm
-    success_url = reverse_lazy('incidencia_list')
+    success_url = reverse_lazy('balita:incidencia_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('incidencia_add')
+        context['create_url'] = reverse_lazy('balita:incidencia_add')
         context['entity'] = 'Informe de Incidencia'
         context['title'] = 'Actualizar informe de Incidencias'
         context['list_url'] = self.success_url
@@ -52,11 +52,11 @@ class IncidenciaUpdateView(generic.UpdateView):
 class IncidenciaDeleteView(generic.DeleteView):
     model = InformeIncidencia
     template_name = 'delete.html'
-    success_url = reverse_lazy('incidencia_list')
+    success_url = reverse_lazy('balita:incidencia_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('incidencia_add')
+        context['create_url'] = reverse_lazy('balita:incidencia_add')
         context['entity'] = 'Informe de Incidencia'
         context['title'] = 'Eliminar informe de Incidencias'
         context['list_url'] = self.success_url

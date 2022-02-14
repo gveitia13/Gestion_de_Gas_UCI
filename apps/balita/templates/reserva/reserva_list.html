@@ -17,9 +17,9 @@
                 <td>{{ obj.quantity }}</td>
                 <td>{{ obj.date_creation }}</td>
                 <td>
-                    <a href="{% url 'reserva_update' obj.id %}" class="btn btn-warning btn-sm circular"><i
+                    <a href="{% url 'balita:reserva_update' obj.id %}" class="btn btn-warning btn-sm circular"><i
                             class="mdi mdi-square-edit-outline"></i></a>
-                    <a href="{% url 'reserva_delete' obj.id %}" class="btn btn-danger btn-sm circular"><i
+                    <a href="{% url 'balita:reserva_delete' obj.id %}" class="btn btn-danger btn-sm circular"><i
                             class="mdi mdi-trash-can-outline"></i></a>
                 </td>
             </tr>
