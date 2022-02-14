@@ -89,7 +89,7 @@ class InformeIncidencia(Informe):
 class InformeReserva(Informe):
     # Lo hace el cliente asere
     quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
-    date_to_reserve = models.DateField(verbose_name='Reservar para', null=True, blank=True,)
+    date_to_reserve = models.DateField(verbose_name='Reservar para', null=True, blank=True, )
 
     def __str__(self):
         return f'{str(self.user)}'
@@ -130,3 +130,7 @@ class InformeVenta(Informe):
 
     class Meta:
         ordering = ['date_creation']
+
+
+# class InformeEntrega(Informe):
+#     pass

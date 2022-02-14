@@ -16,7 +16,7 @@ class UserListView(generic.ListView, ):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['create_url'] = reverse_lazy('user:user_list')
+        context['create_url'] = reverse_lazy('user:user_add')
         context['entity'] = 'Usuario'
         context['title'] = 'Listado de Usuarios'
         return context

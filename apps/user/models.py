@@ -1,6 +1,6 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 
 
 def ValidateSolapin(value):
@@ -18,12 +18,12 @@ class User(AbstractUser):
         ('client', 'Cliente'),
         ('admin', 'Administrador'),
         ('distributor', 'Distribuidor'),
-    ), verbose_name='Rol')
+    ), verbose_name='Rol', null=True, blank=True)
 
     def __str__(self):
         return self.get_full_name() if self.first_name else self.username
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         passw = self.password
         if self.pk is None:
             self.set_password(passw)
@@ -31,6 +31,13 @@ class User(AbstractUser):
             user = User.objects.get(pk=self.pk)
             if user.password != passw:
                 self.set_password(passw)
-        # self.set_password(self.password)
-        # transaction.on_commit(lambda: self.groups.add(Group.objects.first()))
+        # xs
+        self.groups.clear()
+        if self.role:
+            if self.role == 'client':
+                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='cliente')))
+            if self.role == 'admin':
+                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='admin')))
+            if self.role == 'distributor':
+                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='distribuidor')))
         super(User, self).save()
