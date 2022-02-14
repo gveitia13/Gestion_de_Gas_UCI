@@ -111,7 +111,8 @@ class InformeVenta(Informe):
     # Lo hace el distribuidor
     receiver = models.CharField(max_length=100, verbose_name='Nombre del recibidor')
     quantity = models.PositiveSmallIntegerField(verbose_name='Cantidad de balitas')
-    importe = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Importe total', default=0)
+    importe = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Importe total', default=0,
+                                  validators=[MinValueValidator(0, message='El importe debe ser positivo xd')])
 
     def __str__(self):
         return f'{str(self.user)}'

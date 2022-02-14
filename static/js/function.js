@@ -3,13 +3,13 @@ $(function () {
     .querySelectorAll('a')
     .forEach(e => e.classList.remove('active', 'w3-blue-grey'))
 })
-let changeSidebar = function (nav_treeview, nav_item) {
-    let father = document.querySelector(nav_treeview),
-      son = document.querySelector(nav_item)
+let changeSidebar = function (nav_treeview) {
+    let father = document.querySelector(nav_treeview)
+      // son = document.querySelector(nav_item)
     father.classList.add('active')
-    father.parentElement.classList.add('menu-open')
-    son.classList.add('bg-primary')
-    son.parentElement.parentElement.style.display = 'block'
+    // father.parentElement.classList.add('menu-open')
+    // son.classList.add('bg-primary')
+    // son.parentElement.parentElement.style.display = 'block'
   },
   message_error = function (obj) {
     let html = ``

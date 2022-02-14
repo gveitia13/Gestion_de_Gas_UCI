@@ -1,25 +1,25 @@
 {% extends 'base_list.html' %}
 {% load static %}
 {% block columns %}
-    <td>User</td>
-    <td>Motivo</td>
+    <td>Usuario</td>
+    <td>Cantidad</td>
     <td>Fecha de creado</td>
     <td>Opciones</td>
 {% endblock %}
     {% block head_list %}
-        <script src="{% static 'incidencia.js' %}"></script>
+        <script src="{% static 'reserva.js' %}"></script>
     {% endblock %}
 {% block rows %}
     {% if object_list %}
         {% for obj in object_list %}
             <tr>
                 <td>{{ obj.user }}</td>
-                <td>{{ obj.motive }}</td>
+                <td>{{ obj.quantity }}</td>
                 <td>{{ obj.date_creation }}</td>
                 <td>
-                    <a href="{% url 'incidencia_update' obj.id %}" class="btn btn-warning btn-sm circular"><i
+                    <a href="{% url 'reserva_update' obj.id %}" class="btn btn-warning btn-sm circular"><i
                             class="mdi mdi-square-edit-outline"></i></a>
-                    <a href="{% url 'incidencia_delete' obj.id %}" class="btn btn-danger btn-sm circular"><i
+                    <a href="{% url 'reserva_delete' obj.id %}" class="btn btn-danger btn-sm circular"><i
                             class="mdi mdi-trash-can-outline"></i></a>
                 </td>
             </tr>

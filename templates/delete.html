@@ -25,16 +25,16 @@
                         </ul>
                     </div>
                 {% endif %}
-                <div class="alert alert-danger alert-dismissible circular">
-                    <h5><i class="icon mdi mdi-alert-decagram-outline"></i>Notificacion</h5>
-                    Estas seguro de eliminar el registro N° {{ object }}?
+                <div class="alert alert-warning alert-dismissible circular">
+                    <h5><i class="icon mdi mdi-alert-decagram-outline"></i>Cuidado!</h5>
+                    Estas seguro de eliminar el registro <b>{{ object }}</b>?
                 </div>
             </div>
             <div class="card-footer circular-bottom">
-                <button type="submit" class="btn btn-primary circular">
+                <button type="submit" class="btn btn-danger circular">
                     <i class="mdi mdi-content-save"></i> Si, aceptar
                 </button>
-                <a href="{{ list_url }}" class="btn btn-info circular">
+                <a href="{{ list_url }}" class="btn btn-primary circular">
                     <i class="mdi mdi-cancel"></i> Cancelar
                 </a>
             </div>

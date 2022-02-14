@@ -18,12 +18,13 @@
                 <a href="{% url 'index' %}" class="d-block">{{ request.user.username }}</a>
             </div>
         </div>
+    <div class="rayita-light"></div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">Informes</li>
                 {% if request.user.role == 'client' or request.user.is_superuser %}
                     <li class="nav-item">
-                        <a href="{% url 'incidencia_list' %}" class="nav-link">
+                        <a href="{% url 'incidencia_list' %}" class="nav-link incidencia-sidebar">
                             <i class="nav-icon mdi mdi-file-question "></i>
                             <p>
                                 Incidencias
@@ -33,7 +34,7 @@
                 {% endif %}
                 {% if request.user.role == 'admin' or request.user.is_superuser %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{% url 'venta_list' %}" class="nav-link venta-sidebar">
                             <i class="nav-icon mdi mdi-cart"></i>
                             <p>
                                 Ventas
@@ -42,17 +43,18 @@
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{% url 'reserva_list' %}" class="nav-link reserva-sidebar">
                         <i class="nav-icon mdi mdi-checkbox-multiple-marked"></i>
                         <p>
                             Reservaciones
                         </p>
                     </a>
                 </li>
+            <div class="rayita-light"></div>
                 <li class="nav-header">Contrataciones</li>
                 {% if request.user.role == 'admin' or request.user.is_superuser %}
                     <li class="nav-item">
-                        <a href="{% url 'contrato_list' %}" class="nav-link">
+                        <a href="{% url 'contrato_list' %}" class="nav-link contrato-sidebar">
                             <i class="nav-icon mdi mdi-file-document"></i>
                             <p>
                                 Contratos
@@ -62,7 +64,7 @@
                 {% endif %}
                 {% if request.user.role == 'admin' or request.user.is_superuser %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link user-sidebar">
                             <i class="nav-icon mdi mdi-account-group"></i>
                             <p>
                                 Usuarios

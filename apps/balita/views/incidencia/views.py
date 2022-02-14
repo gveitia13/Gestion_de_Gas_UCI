@@ -29,7 +29,7 @@ class IncidenciaCreateView(generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['create_url'] = reverse_lazy('incidencia_add')
         context['entity'] = 'Informe de Incidencia'
-        context['title'] = 'Listado de Incidencias'
+        context['title'] = 'Crear informe de Incidencias'
         context['list_url'] = self.success_url
         return context
 
@@ -44,7 +44,7 @@ class IncidenciaUpdateView(generic.UpdateView):
         context = super().get_context_data(**kwargs)
         context['create_url'] = reverse_lazy('incidencia_add')
         context['entity'] = 'Informe de Incidencia'
-        context['title'] = 'Listado de Incidencias'
+        context['title'] = 'Actualizar informe de Incidencias'
         context['list_url'] = self.success_url
         return context
 
@@ -58,6 +58,6 @@ class IncidenciaDeleteView(generic.DeleteView):
         context = super().get_context_data(**kwargs)
         context['create_url'] = reverse_lazy('incidencia_add')
         context['entity'] = 'Informe de Incidencia'
-        context['title'] = 'Listado de Incidencias'
+        context['title'] = 'Eliminar informe de Incidencias'
         context['list_url'] = self.success_url
         return context

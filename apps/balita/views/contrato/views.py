@@ -30,7 +30,7 @@ class ContratoCreateView(generic.CreateView):
         context['create_url'] = reverse_lazy('contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
-        context['title'] = 'Listado de contratos'
+        context['title'] = 'Crear un contrato'
         return context
 
 
@@ -45,7 +45,7 @@ class ContratoUpdateView(generic.UpdateView):
         context['create_url'] = reverse_lazy('contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
-        context['title'] = 'Listado de contratos'
+        context['title'] = 'Actualizar contrato'
         return context
 
 
@@ -59,5 +59,5 @@ class ContratoDeleteView(generic.DeleteView):
         context['create_url'] = reverse_lazy('contrato_add')
         context['entity'] = 'Contrato'
         context['list_url'] = self.success_url
-        context['title'] = 'Listado de contratos'
+        context['title'] = 'Eliminar contrato'
         return context

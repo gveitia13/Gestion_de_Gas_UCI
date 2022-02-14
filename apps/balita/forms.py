@@ -32,3 +32,23 @@ class InformeIncidenciaForm(ModelForm):
                 }
             )
         }
+
+
+class InformeReservaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = InformeReserva
+        fields = '__all__'
+        exclude = ['date_creation', 'user', 'balita']
+
+
+class InformeVentaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = InformeVenta
+        fields = '__all__'
+        exclude = ['date_creation', 'user', 'balita']
