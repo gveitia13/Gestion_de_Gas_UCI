@@ -4,9 +4,12 @@ from apps.balita.views.contrato.views import *
 from apps.balita.views.incidencia.views import *
 from apps.balita.views.reserva.views import *
 from apps.balita.views.venta.views import *
+# from apps.balita.views.index.views import cerrar_sesion
 
 app_name = 'balita'
 urlpatterns = [
+    #auth
+    # path('logout/', cerrar_sesion, name='cerrar_sesion'),
     # Contrato
     path('contrato/list/', ContratoListView.as_view(), name='contrato_list'),
     path('contrato/add/', ContratoCreateView.as_view(), name='contrato_add'),

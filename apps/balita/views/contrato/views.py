@@ -1,11 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
 from apps.balita.forms import ContratoForm
 from apps.balita.models import Contrato
+from apps.mixins import AdminPermissionRequiredMixin
 
 
-class ContratoListView(generic.ListView, ):
+class ContratoListView(LoginRequiredMixin, AdminPermissionRequiredMixin, generic.ListView, ):
     model = Contrato
     template_name = 'contrato/contrato_list.html'
     queryset = Contrato.objects.all()
@@ -19,7 +21,7 @@ class ContratoListView(generic.ListView, ):
         return context
 
 
-class ContratoCreateView(generic.CreateView):
+class ContratoCreateView(LoginRequiredMixin, AdminPermissionRequiredMixin, generic.CreateView):
     model = Contrato
     template_name = 'contrato/contrato_create.html'
     form_class = ContratoForm
@@ -34,7 +36,7 @@ class ContratoCreateView(generic.CreateView):
         return context
 
 
-class ContratoUpdateView(generic.UpdateView):
+class ContratoUpdateView(LoginRequiredMixin, AdminPermissionRequiredMixin, generic.UpdateView):
     model = Contrato
     template_name = 'contrato/contrato_create.html'
     form_class = ContratoForm
@@ -49,7 +51,7 @@ class ContratoUpdateView(generic.UpdateView):
         return context
 
 
-class ContratoDeleteView(generic.DeleteView):
+class ContratoDeleteView(LoginRequiredMixin, AdminPermissionRequiredMixin, generic.DeleteView):
     model = Contrato
     template_name = 'delete.html'
     success_url = reverse_lazy('balita:contrato_list')

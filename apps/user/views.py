@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,7 +9,7 @@ from apps.user.forms import UserForm
 from apps.user.models import User
 
 
-class UserListView(generic.ListView, ):
+class UserListView(LoginRequiredMixin, generic.ListView, ):
     model = User
     template_name = 'user_list.html'
     queryset = User.objects.all()
@@ -22,7 +23,7 @@ class UserListView(generic.ListView, ):
         return context
 
 
-class UserCreateView(generic.CreateView):
+class UserCreateView(LoginRequiredMixin, generic.CreateView):
     model = User
     template_name = 'form.html'
     form_class = UserForm
@@ -37,7 +38,7 @@ class UserCreateView(generic.CreateView):
         return context
 
 
-class UserUpdateView(generic.UpdateView):
+class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = User
     template_name = 'form.html'
     form_class = UserForm
@@ -52,7 +53,7 @@ class UserUpdateView(generic.UpdateView):
         return context
 
 
-class UserDeleteView(generic.DeleteView):
+class UserDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = User
     template_name = 'delete.html'
     success_url = reverse_lazy('user:user_list')

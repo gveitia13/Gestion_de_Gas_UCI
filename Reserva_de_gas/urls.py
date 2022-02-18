@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from Reserva_de_gas import settings
@@ -30,5 +31,5 @@ urlpatterns = \
         path('', include('apps.balita.urls')),
         path('', include('apps.user.urls')),
         path('', Startpage.as_view(), name='index'),
-
+        path('login/', include('apps.login.urls')),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

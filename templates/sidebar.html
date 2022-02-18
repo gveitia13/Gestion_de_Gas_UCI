@@ -18,7 +18,7 @@
                 <a href="{% url 'index' %}" class="d-block">{{ request.user.username }}</a>
             </div>
         </div>
-    <div class="rayita-light"></div>
+        <div class="rayita-light"></div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">Informes</li>
@@ -50,7 +50,15 @@
                         </p>
                     </a>
                 </li>
-            <div class="rayita-light"></div>
+{#                <li class="nav-item">#}
+{#                    <a href="#" class="nav-link reserva-sidebar">#}
+{#                        <i class="nav-icon mdi mdi-checkbox-multiple-marked"></i>#}
+{#                        <p>#}
+{#                            Entrega#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </li>#}
+                <div class="rayita-light"></div>
                 <li class="nav-header">Contrataciones</li>
                 {% if request.user.role == 'admin' or request.user.is_superuser %}
                     <li class="nav-item">

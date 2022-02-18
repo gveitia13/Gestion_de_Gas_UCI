@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, Group
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.db import models, transaction
 
 
@@ -13,7 +14,7 @@ def ValidateSolapin(value):
 
 class User(AbstractUser):
     solapin = models.CharField(max_length=7, verbose_name='Solapín',
-                               validators=[ValidateSolapin], unique=True)
+                               validators=[ValidateSolapin, RegexValidator('^[a-z][0-9]')], unique=True)
     role = models.CharField(max_length=50, choices=(
         ('client', 'Cliente'),
         ('admin', 'Administrador'),
@@ -32,12 +33,12 @@ class User(AbstractUser):
             if user.password != passw:
                 self.set_password(passw)
         # xs
-        self.groups.clear()
-        if self.role:
-            if self.role == 'client':
-                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='cliente')))
-            if self.role == 'admin':
-                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='admin')))
-            if self.role == 'distributor':
-                transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='distribuidor')))
+        # self.groups.clear()
+        # if self.role:
+        #     if self.role == 'client':
+        #         transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='cliente')))
+        #     if self.role == 'admin':
+        #         transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='admin')))
+        #     if self.role == 'distributor':
+        #         transaction.on_commit(lambda: self.groups.add(Group.objects.get(name='distribuidor')))
         super(User, self).save()
