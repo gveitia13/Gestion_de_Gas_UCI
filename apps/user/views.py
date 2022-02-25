@@ -4,7 +4,9 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
+from rest_framework import viewsets
 
+from apps.serializers import UserSerializer
 from apps.user.forms import UserForm
 from apps.user.models import User
 
@@ -65,3 +67,9 @@ class UserDeleteView(LoginRequiredMixin, generic.DeleteView):
         context['title'] = 'Eliminar Usuario'
         context['list_url'] = self.success_url
         return context
+
+
+# Serializers
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

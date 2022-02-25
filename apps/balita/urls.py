@@ -1,14 +1,17 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from apps.balita.views.contrato.views import *
 from apps.balita.views.incidencia.views import *
 from apps.balita.views.reserva.views import *
 from apps.balita.views.venta.views import *
+
 # from apps.balita.views.index.views import cerrar_sesion
 
 app_name = 'balita'
+
 urlpatterns = [
-    #auth
+    # auth
     # path('logout/', cerrar_sesion, name='cerrar_sesion'),
     # Contrato
     path('contrato/list/', ContratoListView.as_view(), name='contrato_list'),

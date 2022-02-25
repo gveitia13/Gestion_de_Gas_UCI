@@ -28,6 +28,7 @@ from apps.balita.views.venta.views import *
 urlpatterns = \
     [
         path('admin/', admin.site.urls),
+        path('api-auth/', include('rest_framework.urls')),
         path('', include('apps.balita.urls')),
         path('', include('apps.user.urls')),
         path('', Startpage.as_view(), name='index'),
